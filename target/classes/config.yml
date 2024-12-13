@@ -1,0 +1,129 @@
+# Guess The Number Plugin Configuration
+# Coded by https://v-devs.eu
+# This configuration file controls all aspects of the "Guess The Number" game plugin.
+# Edit these settings to customize the game's behavior, messages, and rewards.
+
+# --- Messages ---
+# Customize the messages displayed to players during the game.
+messages:
+  # Message shown when the game starts.
+  # The %min% and %max% placeholders will be replaced by the minimum and maximum values for the number range.
+  start: "&aThe game has started! Guess the number between %min% and %max%!"
+
+  # Message shown when a player wins the game.
+  # The %player% placeholder will be replaced by the player's name.
+  # The %number% placeholder will be replaced by the winning number.
+  win: "&b%player% won! The number was %number%."
+
+  # Message shown when a player tries to use a command they do not have permission for.
+  no_permission: "&cYou do not have permission for this command."
+
+  # Message shown when a player tries to participate but does not have permission.
+  no_permission_to_participate: "&cYou do not have permission to participate in the Guess The Number game. Please contact an administrator if you believe this is an error."
+
+  # Message shown when a player inputs an invalid number (either non-numeric or out of range).
+  invalid_number: "&cYou must enter a valid number between %min% and %max%."
+
+  # Message shown when a player guesses a wrong number.
+  # The %player% placeholder will be replaced by the player's name.
+  wrong_number: "&cThis number was incorrect, try again! You can guess a number between %min% and %max%."
+
+  # Message that will be shown to users who do not implement the command correctly (e.g., missing arguments).
+  correct_usage: "&cCorrect Usage: /start-game <number>"
+
+  # Message sent to the player that canceled the game.
+  author_stop_message: "&cGuessTheNumber was canceled! The game has been stopped."
+
+  # Global message shown after the game is canceled.
+  global_stop_message: "&cGuessTheNumber Game was canceled by %player%."
+
+  # Message sent to the command executor if there's a plugin error.
+  plugin_error: "&cThere was an error while trying to execute this command, please check the console!"
+
+  # Message shown to the stop-game command executor if the game is not currently active.
+  game_not_running: "&cGuessTheNumber Game is currently not active! No game is running at the moment."
+
+  # Message that will be shown if the game is already running
+  game_already_running: "&cThere is already an active instance of the game. You can cancel it with /stop-game"
+
+# --- Game Settings ---
+# Customize game mechanics and behavior here.
+game:
+  # The minimum number that players must guess.
+  # Players must guess a number within this range.
+  min: 1
+
+  # The maximum number that players must guess.
+  # Players must guess a number within this range.
+  max: 100
+
+  # If true, players will see a message when they make an incorrect guess.
+  # Set to 'false' to disable the wrong guess message.
+  displayWrong: true
+
+  # If true, a message will be broadcast to the global chat when the game is canceled.
+  displayCancel: true
+
+  # Check if there is already an active instance of the game before starting it.
+  # If true, it will check if a game is already running.
+  checkForActiveGame: true
+
+  # Should we prevent from starting the game if there is already a running instance?
+  cancelIfGameIsRunning: true
+
+  # The time in seconds before a game automatically cancels if no one has started the game.
+  # Set to 0 to disable auto-cancel.
+  auto_cancel_time: 300
+
+# --- Storage Settings ---
+# Customize how and where the game data (e.g., wins) is stored.
+# The "storage_type" option determines which storage method to use.
+# You can choose from:
+# - SQLITE: Uses SQLite database (lightweight, file-based).
+# - MYSQL: Uses a MySQL database (requires database setup).
+# - YAML: Uses YAML files for storage (easy, but not ideal for large-scale).
+# - NONE: Disables storage (does not store any player data).
+storage:
+  # Set this to NONE if you don't want to store game data (wins).
+  # Choose from SQLITE, MYSQL, YAML, or NONE (for no storage).
+  storage_type: none
+
+# --- MySQL Database Settings ---
+# These settings are used only if you choose MYSQL as the storage type.
+# Fill in the required details to connect to your MySQL database.
+# If using MySQL, make sure you have created the database (e.g., 'test') beforehand.
+database_settings:
+  mysql_host: "127.0.0.1"        # Database server IP address or hostname
+  mysql_port: "3306"            # Database server port (default MySQL port is 3306)
+  mysql_user: "root"            # MySQL username
+  mysql_password: "your_password" # MySQL password
+  mysql_database: "test"        # The name of the MySQL database to use
+
+# --- Permissions ---
+# Settings for permissions required to participate in the game and use commands.
+permissions:
+  # If true, players must have the 'guessthenumber.guess' permission to participate in the game.
+  # Set to 'false' to allow anyone to participate without permission checks.
+  require_permission_to_participate: true
+
+# --- Rewards ---
+# Customize the rewards given to players when they win the game.
+# The %player% placeholder will be replaced with the winner's name in the command.
+rewards:
+  # List of commands to be executed when a player wins the game.
+  # Add more reward commands as needed.
+  - "give %player% diamond 5"  # Example: Give 5 diamonds to the winner.
+  - "eco give %player% 100"    # Example: Give 100 currency (if an economy plugin is installed).
+
+# --- Commands ---
+# List of available commands that can be executed by players and admins.
+commands:
+  # Command to start the game with a specific number.
+  start-game:
+    description: "Starts the Guess The Number game with a given number."
+    usage: "/start-game <number>"
+
+  # Command to stop the active game.
+  stop-game:
+    description: "Stops the Guess The Number game and cancels the current round."
+    usage: "/stop-game"
