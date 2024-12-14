@@ -6,8 +6,12 @@ commands:
   start-game:
     description: Start the Guess the Number game
     usage: /start-game <number>
-    permission: guessnumber.start
+    permission: guessthenumber.start
   stop-game:
     description: Stops an active Guess The Number game
     usage: /stop-game
-    permission: guessnumber.cancel
+    permission: guessthenumber.stop
+  reload-game:
+    description: Reloads the configuration file
+    usage: /reload-game
+    permission: guessthenumber.reload

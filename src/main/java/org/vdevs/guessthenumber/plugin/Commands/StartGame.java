@@ -17,7 +17,8 @@ public class StartGame implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(command.getName().equals("start-game")){
-            if (!sender.hasPermission("guessnumber.start")) {
+
+            if (!sender.hasPermission("guessthenumber.start")) {
                 sender.sendMessage(plugin.getConfig().getString("messages.no_permission").replace("&", "§"));
                 return true;
             }
@@ -29,6 +30,9 @@ public class StartGame implements CommandExecutor {
             // Check if game is already running
             boolean CHECK_FOR_ACTIVE_INSTANCE = plugin.getConfig().getBoolean("game.checkForActiveGame");
             boolean FORCE_CANCEL_INSTANCE = plugin.getConfig().getBoolean("game.cancelIfGameIsRunning");
+
+            int min = plugin.getConfig().getInt("game.min");
+            int max = plugin.getConfig().getInt("game.max");
             if(CHECK_FOR_ACTIVE_INSTANCE && plugin.getTargetNumber() != -1){
                 if(FORCE_CANCEL_INSTANCE){
                     String FORCE_CANCEL_INSTANCE_MESSAGE = plugin.getConfig().getString("messages.game_already_running").replace("&","§");
@@ -40,11 +44,9 @@ public class StartGame implements CommandExecutor {
             }
             try {
                 int number = Integer.parseInt(args[0]);
-                int min = plugin.getConfig().getInt("game.min");
-                int max = plugin.getConfig().getInt("game.max");
 
                 if (number < min || number > max) {
-                    sender.sendMessage(plugin.getConfig().getString("messages.invalid_number").replace("&", "§"));
+                    sender.sendMessage(plugin.getConfig().getString("messages.invalid_number").replace("&", "§").replace("%min%", String.valueOf(min)).replace("%max%", String.valueOf(max)));
                     return true;
                 }
 
@@ -52,9 +54,10 @@ public class StartGame implements CommandExecutor {
                 Bukkit.broadcastMessage(plugin.getConfig().getString("messages.start")
                         .replace("%min%", String.valueOf(min))
                         .replace("%max%", String.valueOf(max))
+                        .replace("%player%",sender.getName())
                         .replace("&", "§"));
             } catch (NumberFormatException e) {
-                sender.sendMessage(plugin.getConfig().getString("messages.invalid_number").replace("&", "§"));
+                sender.sendMessage(plugin.getConfig().getString("messages.invalid_number").replace("&", "§").replace("%min%", String.valueOf(min)).replace("%max%", String.valueOf(max)));
             }
         }
 

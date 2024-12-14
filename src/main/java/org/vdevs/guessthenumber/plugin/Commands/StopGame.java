@@ -20,8 +20,8 @@ public class StopGame implements CommandExecutor {
 
         if(command.getName().equals("stop-game")){
             try{
-                // Check if the game is actually running
-                if(!sender.hasPermission("guessnumber.cancel")){
+                // Check if the game is actually running :D
+                if(!sender.hasPermission("guessthenumber.stop")){
                     sender.sendMessage(plugin.getConfig().getString("messages.no_permission").replace("&", "§"));
                     return true;
                 }

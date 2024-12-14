@@ -8,7 +8,7 @@
 messages:
   # Message shown when the game starts.
   # The %min% and %max% placeholders will be replaced by the minimum and maximum values for the number range.
-  start: "&aThe game has started! Guess the number between %min% and %max%!"
+  start: "&a%player% started GuessTheNumber game! Guess the number between %min% and %max% and win awesome rewards!"
 
   # Message shown when a player wins the game.
   # The %player% placeholder will be replaced by the player's name.
@@ -45,7 +45,8 @@ messages:
 
   # Message that will be shown if the game is already running
   game_already_running: "&cThere is already an active instance of the game. You can cancel it with /stop-game"
-
+  # Message shown when the configuration file is reloaded.
+  reload_message: "&cThe configuration file has been reloaded!"
 # --- Game Settings ---
 # Customize game mechanics and behavior here.
 game:

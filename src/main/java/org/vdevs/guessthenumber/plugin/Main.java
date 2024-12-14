@@ -2,6 +2,7 @@ package org.vdevs.guessthenumber.plugin;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.vdevs.guessthenumber.plugin.Commands.ReloadGame;
 import org.vdevs.guessthenumber.plugin.Commands.StartGame;
 import org.vdevs.guessthenumber.plugin.Commands.StopGame;
 import org.vdevs.guessthenumber.plugin.Events.ChatListener;
@@ -61,6 +62,7 @@ public class Main extends JavaPlugin {
         }
         getCommand("start-game").setExecutor(new StartGame(this));
         getCommand("stop-game").setExecutor(new StopGame(this));
+        getCommand("reload-game").setExecutor(new ReloadGame(this));
         Bukkit.getPluginManager().registerEvents(new ChatListener(this), this);
         getLogger().info("GuessTheNumber plugin enabled.");
     }
