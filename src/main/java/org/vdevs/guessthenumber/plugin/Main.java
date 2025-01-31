@@ -6,6 +6,7 @@ import org.vdevs.guessthenumber.plugin.Commands.ReloadGame;
 import org.vdevs.guessthenumber.plugin.Commands.StartGame;
 import org.vdevs.guessthenumber.plugin.Commands.StopGame;
 import org.vdevs.guessthenumber.plugin.Events.ChatListener;
+import org.vdevs.guessthenumber.plugin.Handlers.UpdateHandler;
 import org.vdevs.guessthenumber.plugin.Storage.GetStorageType;
 import org.vdevs.guessthenumber.plugin.Storage.MySQLDatabase;
 import org.vdevs.guessthenumber.plugin.Storage.SQLiteDatabase;
@@ -17,6 +18,7 @@ public class Main extends JavaPlugin {
     private MySQLDatabase mySQLDatabase;
     private int targetNumber = -1;
 
+    private String gameAuthor = "";
     @Override
     public void onEnable() {
         saveDefaultConfig();
@@ -24,6 +26,18 @@ public class Main extends JavaPlugin {
         GetStorageType getStorageType = new GetStorageType(this);
         String storageType = getStorageType.getStorageType();
 
+        // Dynamically update config.yml
+
+        UpdateHandler updateHandler = new UpdateHandler(this);
+
+        updateHandler.checkConfigUpdates();
+
+        if(getServer().getPluginManager().getPlugin("TitleAPI") == null) {
+            getLogger().warning("TitleAPI is not installed. Keep in mind that if you want to use Titles, you need to install TitleAPI.");
+        }
+        else{
+            getLogger().info("[V] TitleAPI is installed, you can use Titles safely.");
+        }
         // Set the appropriate storage based on the config value
         if (storageType.equals("sqlite")) {
             sqliteDatabase = new SQLiteDatabase();
@@ -95,7 +109,16 @@ public class Main extends JavaPlugin {
         return targetNumber;
     }
 
+    public final String getTargetAuthor(){
+        return gameAuthor;
+    }
     public void setTargetNumber(int number) {
         this.targetNumber = number;
     }
+
+    public void setGameAuthor(String author){
+        this.gameAuthor = author;
+    }
+
+
 }

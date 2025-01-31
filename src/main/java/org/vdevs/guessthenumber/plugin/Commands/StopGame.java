@@ -39,6 +39,7 @@ public class StopGame implements CommandExecutor {
                 sender.sendMessage(AUTHOR_STOP_MESSAGE);
                 if(sendGlobally) {Bukkit.broadcastMessage(GLOBAL_STOP_MESSAGE);}
                 plugin.setTargetNumber(-1);
+                plugin.setGameAuthor("");
             }catch(Exception error){
                 String ERROR_MESSAGE = plugin.getConfig().getString("messages.plugin_error").replace("&","§");
 

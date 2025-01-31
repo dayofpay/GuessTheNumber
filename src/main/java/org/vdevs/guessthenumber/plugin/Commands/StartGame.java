@@ -51,6 +51,7 @@ public class StartGame implements CommandExecutor {
                 }
 
                 plugin.setTargetNumber(number);
+                plugin.setGameAuthor(sender.getName());
                 Bukkit.broadcastMessage(plugin.getConfig().getString("messages.start")
                         .replace("%min%", String.valueOf(min))
                         .replace("%max%", String.valueOf(max))

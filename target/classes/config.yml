@@ -47,6 +47,8 @@ messages:
   game_already_running: "&cThere is already an active instance of the game. You can cancel it with /stop-game"
   # Message shown when the configuration file is reloaded.
   reload_message: "&cThe configuration file has been reloaded!"
+  # Message that will be shown to the author if he tries to participate into the game
+  author_participation_message: "&cYou cannot participate in the game because you are the game author!"
 # --- Game Settings ---
 # Customize game mechanics and behavior here.
 game:
@@ -75,6 +77,48 @@ game:
   # The time in seconds before a game automatically cancels if no one has started the game.
   # Set to 0 to disable auto-cancel.
   auto_cancel_time: 300
+
+  #Should we prevent the game author to participate in the game?
+  preventAuthorParticipation: false
+  # Title Announcement Configuration
+  # This section controls whether titles are sent to players when a game is won.
+  sendTitle: false
+
+# Description: Determines if a title will be displayed to players when someone wins the game.
+# Notes:
+# - Requires the "TitleAPI" plugin to be installed and active on the server.
+# - If TitleAPI is not present, titles will not appear, even if this option is enabled.
+
+  title_mode: "WINNER_ONLY"
+
+# Description: Specifies which players will see the title when a game concludes.
+# Valid Options:
+# - WINNER_ONLY: The title will be shown exclusively to the winning player.
+# - ALL_PLAYERS: The title will be broadcast to all players on the server.
+# Use Case Examples:
+# - WINNER_ONLY is ideal for competitive environments where individual recognition is desired.
+# - ALL_PLAYERS can enhance engagement by keeping all players informed of the game's outcome.
+
+titles:
+  header: "&a%winner% won!"
+  # Description: The main title text displayed when a player wins.
+  # Placeholders:
+  # - %winner%: Replaced with the name of the winning player.
+  # - %player%: Replaced with the name of the winning player.
+  # Formatting:
+  # - Supports Minecraft color codes (e.g., &a for green, &b for aqua).
+
+  subtitle: "&bThe number was &a%number%"
+  # Description: The subtitle text that appears below the main title.
+  # Placeholders:
+  # - %number%: Replaced with the winning number or relevant game result.
+  # - %player%: Replaced with the name of the winning player.
+  # Formatting:
+  # - Supports Minecraft color codes for customization.
+
+# Example Output (for a winner named Alex with the winning number 12):
+# - Main Title: "Alex won!" (green)
+# - Subtitle: "The number was 12" (aqua and green)
 
 # --- Storage Settings ---
 # Customize how and where the game data (e.g., wins) is stored.
@@ -105,7 +149,7 @@ database_settings:
 permissions:
   # If true, players must have the 'guessthenumber.guess' permission to participate in the game.
   # Set to 'false' to allow anyone to participate without permission checks.
-  require_permission_to_participate: true
+  require_permission_to_participate: false
 
 # --- Rewards ---
 # Customize the rewards given to players when they win the game.

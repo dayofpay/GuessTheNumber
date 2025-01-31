@@ -1,0 +1,17 @@
+version: '${project.version}'
+name: GuessTheNumber
+main: org.vdevs.guessthenumber.plugin.Main
+api-version: 1.8
+commands:
+  start-game:
+    description: Start the Guess the Number game
+    usage: /start-game <number>
+    permission: guessthenumber.start
+  stop-game:
+    description: Stops an active Guess The Number game
+    usage: /stop-game
+    permission: guessthenumber.stop
+  reload-game:
+    description: Reloads the configuration file
+    usage: /reload-game
+    permission: guessthenumber.reload

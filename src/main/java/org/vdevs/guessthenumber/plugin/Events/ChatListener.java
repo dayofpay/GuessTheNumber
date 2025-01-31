@@ -1,5 +1,6 @@
 package org.vdevs.guessthenumber.plugin.Events;
 
+import com.connorlinfoot.titleapi.TitleAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -49,6 +50,12 @@ public class ChatListener implements Listener {
                int guess = Integer.parseInt(message);
 
                if (guess == plugin.getTargetNumber()) {
+                   boolean preventAuthorToJoin = plugin.getConfig().getBoolean("game.preventAuthorParticipation");
+                   if(preventAuthorToJoin && player.getName().equals(plugin.getTargetAuthor())){
+                       String preventAuthorToJoinMessage = plugin.getConfig().getString("messages.author_participation_message", "&cYou cannot join the game because you are the author.").replace("&", "§");
+                       player.sendMessage(preventAuthorToJoinMessage);
+                       return;
+                   }
                    // Announce the winner
                    String winMessage = plugin.getConfig().getString("messages.win", "&aYou won!")
                            .replace("%player%", player.getName())
@@ -66,9 +73,34 @@ public class ChatListener implements Listener {
                    WinService win_service_hook = new WinService(plugin);
 
                    win_service_hook.handleWin(player);
+                   if (plugin.getConfig().getBoolean("game.sendTitle")) {
+                       String titleHeader = plugin.getConfig().getString("titles.header")
+                               .replace("&", "§")
+                               .replace("%player%", player.getName())
+                               .replace("%winner%", player.getName())
+                               .replace("%number%", String.valueOf(plugin.getTargetNumber()));
+
+                       String subtitle = plugin.getConfig().getString("titles.subtitle")
+                               .replace("%player%", player.getName())
+                               .replace("%number%", String.valueOf(plugin.getTargetNumber()));
+
+                       String TITLE_MODE = plugin.getConfig().getString("game.title_mode");
+                       plugin.getLogger().info("TITLE_MODE: " + TITLE_MODE);
+                       if (TITLE_MODE.equals("WINNER_ONLY")) {
+                           TitleAPI.sendTitle(player, titleHeader, subtitle, 10, 40, 10);
+                       } else if (TITLE_MODE.equals("ALL_PLAYERS")) {
+                           for (Player bukkitPlayer : Bukkit.getOnlinePlayers()) {
+                               TitleAPI.sendTitle(bukkitPlayer, titleHeader, subtitle, 10, 40, 10);
+                           }
+                       }
+                       else{
+                           plugin.getLogger().info("Unknown title mode: " + TITLE_MODE);
+                       }
+                   }
 
                    // Reset the game
                    plugin.setTargetNumber(-1);
+                   plugin.setGameAuthor("");
                } else {
                    if (plugin.getConfig().getBoolean("game.displayWrong")) {
                        // Get and format the wrong guess message
