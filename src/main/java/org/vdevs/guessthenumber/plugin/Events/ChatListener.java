@@ -37,7 +37,7 @@ public class ChatListener implements Listener {
         // Check if the plugin requires permission to participate
         if (plugin.getConfig().getBoolean("permissions.require_permission_to_participate") && !player.hasPermission("guessthenumber.guess") && isNumber) {
             // If the player doesn't have permission, cancel the event and send a message
-            event.setCancelled(true);  // Optionally, cancel the event to prevent the message from appearing in chat
+            event.setCancelled(true);
             String noPermissionMessage = plugin.getConfig().getString("messages.no_permission_to_participate", "&cYou do not have permission to participate in the game.")
                     .replace("&", "§");
             player.sendMessage(noPermissionMessage);

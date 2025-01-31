@@ -49,6 +49,10 @@ messages:
   reload_message: "&cThe configuration file has been reloaded!"
   # Message that will be shown to the author if he tries to participate into the game
   author_participation_message: "&cYou cannot participate in the game because you are the game author!"
+  # Message displayed when a player tries to use the command while on cooldown.
+  # %time% will be replaced with the remaining seconds. ( You can use %player% to replace the player's name as well )
+  cooldown_message: "&cPlease wait %time% more seconds before using this command again."
+
 # --- Game Settings ---
 # Customize game mechanics and behavior here.
 game:
@@ -83,6 +87,12 @@ game:
   # Title Announcement Configuration
   # This section controls whether titles are sent to players when a game is won.
   sendTitle: false
+  # Enable or disable the cooldown for the command.
+  useCooldown: true # You can use guessthenumber.bypass_cooldown permission to bypass the cooldown
+
+  # The cooldown duration in seconds before a player can use the command again.
+  cooldownTime: 3600  # 3600 seconds = 1 hour
+
 
 # Description: Determines if a title will be displayed to players when someone wins the game.
 # Notes:
