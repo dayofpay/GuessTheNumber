@@ -93,6 +93,20 @@ game:
   # The cooldown duration in seconds before a player can use the command again.
   cooldownTime: 3600  # 3600 seconds = 1 hour
 
+  # Enables or disables the automatic start of the "Guess The Number" game at regular intervals.
+  # true  - The plugin will automatically start a new game periodically (based on cooldown).
+  # false - Automatic game scheduling is disabled. Games must be started manually.
+  enable_auto_game_scheduler: true
+
+  # Time delay between each automatically scheduled game (in **seconds**).
+  # For example:
+  #   3600 = 1 hour
+  #   1800 = 30 minutes
+  #   300  = 5 minutes
+  #   30   = 30 seconds (for testing only; not recommended in production)
+  #
+  # Note: The first game will start after this cooldown has passed from server start.
+  game_scheduler_cooldown: 3600
 
 # Description: Determines if a title will be displayed to players when someone wins the game.
 # Notes:

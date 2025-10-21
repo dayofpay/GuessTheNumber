@@ -11,6 +11,8 @@ import org.vdevs.guessthenumber.plugin.Storage.GetStorageType;
 import org.vdevs.guessthenumber.plugin.Storage.MySQLDatabase;
 import org.vdevs.guessthenumber.plugin.Storage.SQLiteDatabase;
 import org.vdevs.guessthenumber.plugin.Storage.YAMLDatabase;
+import org.vdevs.guessthenumber.plugin.Tasks.TaskScheduler;
+
 public class Main extends JavaPlugin {
     private SQLiteDatabase sqliteDatabase;
     private YAMLDatabase yamlDatabase;
@@ -32,6 +34,7 @@ public class Main extends JavaPlugin {
 
         updateHandler.checkConfigUpdates();
 
+        new TaskScheduler(this).start();
         if(getServer().getPluginManager().getPlugin("TitleAPI") == null) {
             getLogger().warning("TitleAPI is not installed. Keep in mind that if you want to use Titles, you need to install TitleAPI.");
         }
