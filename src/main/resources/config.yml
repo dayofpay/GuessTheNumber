@@ -107,7 +107,8 @@ game:
   #
   # Note: The first game will start after this cooldown has passed from server start.
   game_scheduler_cooldown: 3600
-
+  # Description: If true, the console will be able to start the game without the player permission.
+  console_can_start_game: true
 # Description: Determines if a title will be displayed to players when someone wins the game.
 # Notes:
 # - Requires the "TitleAPI" plugin to be installed and active on the server.

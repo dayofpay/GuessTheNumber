@@ -25,8 +25,8 @@ public class StartGame implements CommandExecutor {
 
         if (command.getName().equalsIgnoreCase("start-game")) {
             final int COOLDOWN_TIME = plugin.getConfig().getInt("game.cooldownTime") * 1000; // Cooldown in milliseconds
-            final boolean CONSOLE_CAN_START_GAME = plugin.getConfig().getBoolean("game.console_can_start_game");
-            if (!(sender instanceof Player) && !CONSOLE_CAN_START_GAME) {
+
+            if (!(sender instanceof Player)) {
                 sender.sendMessage("[GuessTheNumber] Only players can run this command!");
                 return true;
             }
